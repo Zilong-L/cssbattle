@@ -1,4 +1,4 @@
-export default function Battle2() {
+export default function Battle() {
   return (
     <div className="h-[300px] w-[400px]  bg-[#E3516E] flex  justify-center items-center relative">
       <div className="grid grid-cols-2">
