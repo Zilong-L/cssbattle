@@ -70,7 +70,7 @@ export default function App() {
           >
             <Component />
           </div>
-            <div className="z-1000 fixed right-0 top-0 opacity-0 " style={{ opacity: currentIndex === index ? 1 : 0 }}>
+            <div className="z-1000 fixed right-0 top-0 opacity-0 transition-opacity duration-500" style={{ opacity: currentIndex === index ? 1 : 0 }}>
               <CodeBox name={name} code={code} />
             </div>
         </motion.div>
