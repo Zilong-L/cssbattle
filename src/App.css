@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+
+div[data-number]::before{
+    content: "#"attr(data-number);
+    font-size: 50px;
+    color:white;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+}
