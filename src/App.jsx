@@ -3,7 +3,7 @@ import './App.css'
 // 🔥 动态加载所有组件
 const components = import.meta.glob("./components/*.jsx");
 const rawSources = import.meta.glob("./components/*.jsx", { query: "?raw", import: "default" });
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion'
 
 export default function App() {
   const wheelRef = useRef(null);
@@ -30,6 +30,11 @@ export default function App() {
           return { name, Component, code };
         })
       );
+      imports.sort((a, b) => {
+        const x = Number(a.name.split('_')[0])
+        const y = Number(b.name.split('_')[0])
+        return x - y;
+      })
       setLoadedComponents(imports.reverse()); // 逆序排列，最新的在最前
     };
 
@@ -52,17 +57,17 @@ export default function App() {
       style={{ scrollBehavior: "smooth" }}
     >
       <h1 className="text-[100px] snap-start"
-            onMouseEnter={() => {setCurrentIndex( -1)}}
+        onMouseEnter={() => { setCurrentIndex(-1) }}
       >CSS Battles </h1>
       <h1 className="absolute bottom-10 left-0 text-[20px] snap-start">created by Liu Zilong </h1>
       {loadedComponents.map(({ name, Component, code }, index) => (
         <motion.div key={index} className="h-full aspect-[4/3] snap-start group"
-          
+
         >
           <div
             data-number={loadedComponents.length - index}
             className="relative  group h-screen aspect-[4/3] rounded-md "
-            onMouseEnter={() => {console.log(`enter ${index}`),setCurrentIndex( index)}}
+            onMouseEnter={() => { console.log(`enter ${index}`), setCurrentIndex(index) }}
             style={{
               transform: `scale(${height / 300})`, // ⚡ 确保比例缩放
               transformOrigin: "top left",
@@ -70,9 +75,9 @@ export default function App() {
           >
             <Component />
           </div>
-            <div className="z-1000 fixed right-0 top-0 opacity-0 transition-opacity duration-500" style={{ opacity: currentIndex === index ? 1 : 0 }}>
+          {/* <div className="z-1000 fixed right-0 top-0 opacity-0 transition-opacity duration-500" style={{ opacity: currentIndex === index ? 1 : 0 }}>
               <CodeBox name={name} code={code} />
-            </div>
+            </div> */}
         </motion.div>
       ))}
     </div>
